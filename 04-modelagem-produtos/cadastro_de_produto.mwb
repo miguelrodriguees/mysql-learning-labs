@@ -1,0 +1,43 @@
+create database bd_cadastro_produto;
+
+use bd_cadastro_produto;
+
+create table categoria_produto(
+id_categoria char (15),
+nome_categoria varchar(30),
+primary key (id_categoria)
+);
+
+create table tipo_produto(
+id_tipo_produto char (15),
+nome_tipo varchar(30),
+primary key (id_tipo_produto)
+);
+
+create table unidade_de_medida(
+id_unidade_medida char (15),
+nome_unidade varchar(20),
+primary key (id_unidade_medida)
+);
+
+create table produtos(
+id_produto int,
+descricao_produto varchar (50),
+id_categoria char (15),
+id_unidade_medida char (15),
+id_tipo_produto char (15),
+primary key (id_produto),
+foreign key (id_categoria) references categoria_produto(id_categoria),
+foreign key (id_tipo_produto) references tipo_produto(id_tipo_produto),
+foreign key (id_unidade_medida) references unidade_de_medida(id_unidade_medida)
+);
+
+create table estoque (
+id_estoque char (15),
+id_produto int,
+estoque_minimo decimal (2,0),
+estoque_maximo decimal (4,0),
+primary key (id_estoque),
+foreign key (id_produto) references produtos(id_produto)
+);
+
